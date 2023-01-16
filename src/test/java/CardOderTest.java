@@ -3,6 +3,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.$;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -129,7 +130,16 @@ public class CardOderTest {
         $("[data-test-id=name] input").setValue("Артем Вавилов");
         $("[data-test-id=phone] input").setValue("+79995554555");
         $("button").click();
-        assertEquals("rgba(255, 92, 92, 1)", $("[data-test-id='agreement'] .checkbox__text").getCssValue("color"));
+        $("label.input_invalid").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй"));
+
+    }
+
+    @Test
+    void shouldEmptyCheckBoxTwo() {
+        $("[data-test-id=name] input").setValue("Артем Вавилов");
+        $("[data-test-id=phone] input").setValue("+79995554555");
+        $("button").click();
+        $("label.input_invalid").shouldBe(visible);
 
     }
 }
