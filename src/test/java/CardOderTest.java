@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.$;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CardOderTest {
 
@@ -128,7 +129,7 @@ public class CardOderTest {
         $("[data-test-id=name] input").setValue("Артем Вавилов");
         $("[data-test-id=phone] input").setValue("+79995554555");
         $("button").click();
-        $("[data-test-id='agreement'] .checkbox__text").getCssValue("color").equals("#ff5c5c");
+        assertEquals("rgba(255, 92, 92, 1)", $("[data-test-id='agreement'] .checkbox__text").getCssValue("color"));
 
     }
 }
